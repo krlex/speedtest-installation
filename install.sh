@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
 
-export DEBIAN="gnupg1 apt-transport-https dirmngr"
-export UBUNTU="gnupg1 apt-transport-https dirmngr"
-export FEDORA="wget"
-export DOWNLOAD="wget https://bintray.com/ookla/rhel/rpm -O /etc/yum.repos.d/bintray-ookla-rhel.repo"
+export DEBIAN="gnupg1 apt-transport-https dirmngr curl"
+export FEDORA="curl"
+export DOWNLOAD="curl -s https://install.speedtest.net/app/cli/install.rpm.sh | sudo bash"
 
   install_debian() {
     $SUDO apt update
     $SUDO apt install -y $DEBIAN
-    export INSTALL_KEY=379CE192D401AB61
-    $SUDO apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY
-    echo "deb https://ookla.bintray.com/debian generic main" | $SUDO tee  /etc/apt/sources.list.d/speedtest.list
     $SUDO apt update
     echo " Speedtest is ready for Debian"
+    curl -s https://install.speedtest.net/app/cli/install.deb.sh | $SUDO bash
     $SUDO apt install -y speedtest
     echo " Finished Speedtest installation"
   
@@ -20,12 +17,9 @@ export DOWNLOAD="wget https://bintray.com/ookla/rhel/rpm -O /etc/yum.repos.d/bin
 
   install_ubuntu() {
     $SUDO apt update
-    $SUDO apt install -y $UBUNTU 
-    export INSTALL_KEY=379CE192D401AB61
-    $SUDO apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY
-    echo "deb https://ookla.bintray.com/debian generic main" | $SUDO tee  /etc/apt/sources.list.d/speedtest.list
-    $SUDO apt update
+    $SUDO apt install -y $DEBAIN
     echo " Speedtest is ready for Ubuntu"
+    curl -s https://install.speedtest.net/app/cli/install.deb.sh | $SUDO bash
     $SUDO apt install -y speedtest
     echo " Finished Speedtest installation"
   
